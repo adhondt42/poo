@@ -5,7 +5,90 @@
 	</head>
 	<body>
 		<script>
-			
+
+
+
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Introduction_%C3%A0_JavaScript_orient%C3%A9_objet
+// Le constructeur Personne
+var Personne = function(nom) {
+   this.nom = nom;
+};
+
+Personne.prototype.marcher = function(){
+  console.log("Je marche !");
+};
+Personne.prototype.direBonjour = function(){
+  console.log("Bonjour, je suis "+this.nom);
+};
+
+// Le constructeur Étudiant
+function Étudiant(nom, sujet) {
+  // On appelle le constructeur parent
+  // pour profiter des propriétés définies dans la fonction
+  Personne.call(this, nom);
+  this.sujet = sujet;
+}
+
+// On déclare l'héritage pour bénéficier de la chaîne de prototypes
+// Attention à ne pas utiliser "new Personne()". Ceci est incorrect
+// on ne peut pas fournir l'argument "nom". C'est pourquoi on appelle
+// Personne avant, dans le constructeur Étudiant.
+console.log(Étudiant.prototype)
+
+Étudiant.prototype = Object.create(Personne.prototype);
+
+console.log(Étudiant.prototype)
+// on corrige le constructeur qui pointe sur celui de Personne
+Étudiant.prototype.constructor = Étudiant;
+ 
+// on remplace la méthode direBonjour pour l'étudiant
+Étudiant.prototype.direBonjour = function(){
+ console.log("Bonjour, je suis "+ this.nom + ". J'étudie " + this.sujet + ".");
+};
+
+// on ajoute la méthode aurevoir
+Étudiant.prototype.aurevoir = function(){
+  console.log('Au revoir');
+};
+
+var étudiant1 = new Étudiant("Jean", "la physique appliquée");
+étudiant1.direBonjour();
+étudiant1.marcher();
+étudiant1.aurevoir();
+
+// on vérifie l'héritage
+console.log(étudiant1 instanceof Personne); // true 
+console.log(étudiant1 instanceof Étudiant); // true
+console.log("-----------------")
+
+
+
+
+var Personne = function(nom) {
+   this.nom = nom;
+};
+
+Personne.marcher = function(){
+  console.log("Je marche !");
+};
+Personne.direBonjour = function(){
+  console.log("Bonjour, je suis "+this.nom);
+};
+
+console.log(Personne.direBonjour())
+
+console.log("-----------------")
+console.log("-----------------")
+
+
+function Arbre(nom) {
+   this.nom = nom;
+}
+
+var monArbre = new Arbre("Sequoia");
+console.log( "monArbre.constructor vaut " + monArbre.constructor );
+
+
 		</script>
 	</body>
 </html>
