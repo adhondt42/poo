@@ -18,7 +18,7 @@ WORKDIR 42/
 CMD /bin/zsh
 
 # docker build -t mars .
-# docker run -it --mount type=bind,source="$(pwd)"/,target=/42  -p 4000:4000 mars
-# export HOME=/
+# docker run -it  -p 4000:4000 --mount type=bind,source="$(pwd)"/,target=/42  mars
+# export HOME=/ && export PROMPT="$fg[red]%} ukulele %d> %{$reset_color%}%"
 # export PROMPT="$fg[red]%} ukulele %d> %{$reset_color%}%"
 # npm run dev
