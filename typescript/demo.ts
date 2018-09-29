@@ -1,21 +1,6 @@
-//fct classique 
-function salut(t: Array<string>, style_var: string | number, opt?:number): void {
-	let out = []
-	for (let item of t) {
-		out.push("Salut " + item)
-	}
-	for (let line of out) {
-		console.log(line)
-	}
-	console.log("Style_var: ", style_var)
-	if (opt)
-		console.log("Opt: " + opt)
-}
+import myconsoleLog from './display'
 
-salut(['--1--', 'abc'], "Cette var est stylé")
-salut(['--2--', 'def'], 22, 12)
-
-console.log("\n------------------\nClass, extend management\n------------------\n")
+myconsoleLog("Class, extend management", 1)
 
 class Demo {
 	
@@ -62,17 +47,13 @@ console.log(d2.demo(600))
 console.log("Test supertool in d2:", d2.supertool)
 
 
-console.log("\n------------------\nInterfaces - Utiliser fct comme constructor\n------------------\n")
-
-
-
+myconsoleLog("Interfaces + Class object & new", 1)
 
 interface weekType {
 
 	completeWeek: Array<number>
 	dayoff: number
 }
-
 
 class Employee {
 	
@@ -94,7 +75,6 @@ class Employee {
 	}
 }
 
-
 function weekShift(worker: Employee): number {
 
 	let total:number = 0
@@ -108,11 +88,40 @@ function weekShift(worker: Employee): number {
 	return total
 }
 
-
 let Marcel = new Employee("Marcel", "Cecire", [0, 4, 5], 2)
 
 console.log(Marcel.fullname)
 console.log(Marcel.weekData)
 console.log(Marcel.fullName("Jack", "Le voleur de fonction public"))
 // console.log(Marcel.buildName("Jack", "Ne vole pas la fonction privee"))
-console.log(weekShift(Marcel))
+console.log("Total Marcel's shift this week : ", weekShift(Marcel), '\n')
+
+
+myconsoleLog("Function object & new", 1)
+
+
+function createEmployee(firstname:string, lastname:string,  completeWeek:Array<number>, dayoff:number) {
+
+	let newWorker = {
+		fullname: "",
+		weekData: {}
+
+	}
+
+	newWorker.weekData = {completeWeek, dayoff}
+	newWorker.fullname = fullName()
+	
+	function fullName (): string {
+		return (firstname + ' ' + lastname)
+	
+	}
+	return newWorker
+}
+
+let Danny = createEmployee("Danny", "Dhondt", [12, 3, 0], 4)
+
+
+console.log(Danny.fullname)
+console.log(Danny.weekData)
+// console.log(Danny.fullName("Jack", "ne peut pas voler les fct de Danny"))
+// console.log(weekShift(Danny)) Impossible cause type 

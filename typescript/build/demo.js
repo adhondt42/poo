@@ -12,24 +12,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-//fct classique 
-function salut(t, style_var, opt) {
-    var out = [];
-    for (var _i = 0, t_1 = t; _i < t_1.length; _i++) {
-        var item = t_1[_i];
-        out.push("Salut " + item);
-    }
-    for (var _a = 0, out_1 = out; _a < out_1.length; _a++) {
-        var line = out_1[_a];
-        console.log(line);
-    }
-    console.log("Style_var: ", style_var);
-    if (opt)
-        console.log("Opt: " + opt);
-}
-salut(['--1--', 'abc'], "Cette var est stylé");
-salut(['--2--', 'def'], 22, 12);
-console.log("\n------------------\nClass, extend management\n------------------\n");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var display_1 = __importDefault(require("./display"));
+display_1.default("Class, extend management", 1);
 var Demo = /** @class */ (function () {
     function Demo(num, name) {
         this.element = 100;
@@ -68,7 +56,7 @@ console.log(d.demo(5));
 d2.test();
 console.log(d2.demo(600));
 console.log("Test supertool in d2:", d2.supertool);
-console.log("\n------------------\nInterfaces - Utiliser fct comme constructor\n------------------\n");
+display_1.default("Interfaces + Class object & new", 1);
 var Employee = /** @class */ (function () {
     function Employee(firstname, lastname, completeWeek, dayoff) {
         this.weekData = { completeWeek: completeWeek, dayoff: dayoff };
@@ -99,4 +87,22 @@ console.log(Marcel.fullname);
 console.log(Marcel.weekData);
 console.log(Marcel.fullName("Jack", "Le voleur de fonction public"));
 // console.log(Marcel.buildName("Jack", "Ne vole pas la fonction privee"))
-console.log(weekShift(Marcel));
+console.log("Total Marcel's shift this week : ", weekShift(Marcel), '\n');
+display_1.default("Function object & new", 1);
+function createEmployee(firstname, lastname, completeWeek, dayoff) {
+    var newWorker = {
+        fullname: "",
+        weekData: {}
+    };
+    newWorker.weekData = { completeWeek: completeWeek, dayoff: dayoff };
+    newWorker.fullname = fullName();
+    function fullName() {
+        return (firstname + ' ' + lastname);
+    }
+    return newWorker;
+}
+var Danny = createEmployee("Danny", "Dhondt", [12, 3, 0], 4);
+console.log(Danny.fullname);
+console.log(Danny.weekData);
+// console.log(Danny.fullName("Jack", "ne peut pas voler les fct de Danny"))
+// console.log(weekShift(Danny)) Impossible cause type 

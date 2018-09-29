@@ -58,7 +58,8 @@
 	"pretty": true
   },  
   "files": [
-	  "demo.ts"
+    "demo.ts",
+    "display.ts"
   ],
   "excluse": [
 	  "node_modules"
