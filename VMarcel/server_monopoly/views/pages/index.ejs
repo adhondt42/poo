@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Todo v0.1.0</title>
-    <link rel="stylesheet" href="/semantic/semantic.min.css">
-</head>
-<body>
-
-<div class="ui menu">
-    <a href="/" class ="header item ">Do it!</a>
-</div>
-
+<% include header %>
 <div class="ui segments">
         <div class="ui teal secondary  segment">
           <p>|| Etat du marché || Temps : 0 Cycles | Taille total de marché : 0 euros </p>
@@ -40,29 +29,46 @@
                     
                         </div>
                         <div class="ui segment">
-                          <p>5 Middle</p>
+                          <p>C'est au tour de <%= domData %></p>
                         </div>
-                        <div class="ui horizontal segments">
-                          <div class="ui segment">
-                            <p>6 Top</p>
+
+                        <div class="ui four column centered grid">
+                              <div class="column yellow">
+                                <a class="ui blue ribbon label">Developer</a>
+                                <p>R&D - 3 cycles <button class="ui primary button right floated"> x </button> </p>
+                              </div>
+                              <div class="column orange ">
+                                  <p>Recruit dev - 6 cycles <button class="ui primary button right floated"> x </button> </p>
+
+                              </div>
+                              <div class="column red">
+                                  <p>Recruit Investor - 12 cycles <button class="ui primary button right floated"> x </button> </p>
+
+                              </div>
                           </div>
-                          <div class="ui segment">
-                            <p>7 Middle</p>
-                          </div>
-                          <div class="ui segment">
-                            <p>8 Bottom</p>
-                          </div>
+                        <div class="ui four column centered grid">
+                            <div class="column yellow">
+                              <a class="ui blue ribbon label">Investor</a>
+
+                              <p>Advertising - 2 cycles <button class="ui primary button right floated"> x </button> </p>
+                            </div>
+                            <div class="column orange ">
+                                <p>Recruit dev - 8 cycles <button class="ui primary button right floated"> x </button> </p>
+
+                            </div>
+                            <div class="column red">
+                                <p>R&D - 13 cycles <button class="ui primary button right floated"> x </button> </p>
+
+                            </div>
                         </div>
-                        <div class="ui segment">
-                          <p>9 Bottom</p>
-                        </div>
-                      </div>
+                  </div>
+                      
+
+
+                       
                 
         </div>
       </div>
 
 
-</body>
-</html>
-<style>
-</style>
+      <% include footer %>

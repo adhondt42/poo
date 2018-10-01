@@ -1,0 +1,47 @@
+<% include header %>
+<div class="ui  center aligned grid">
+        <div class="sixteen wide column">
+            <div class="ui segment">
+                Bienvenue ! Veuillez choisir pour 2 joueurs 
+            </div>
+        </div>
+
+</div>
+
+<div class="ui segments">
+    <form id="formsign-up" method="post" action="register_players">
+        <div class="ui horizontal segments">
+            <div class="ui segment">
+                <div class="ui left icon input">
+                    <input type="text" id="p1_name" name="p1_name" placeholder="Nom joueur 1...">
+                    <i class="users icon"></i>
+                </div>
+            </div>
+            <div class="ui segment">
+                <div class="ui left icon input">
+                    <input type="text" id="p2_name" name="p2_name"  placeholder="Nom joueur 2...">
+                    <i class="users icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui horizontal segments">
+            <div class="ui segment">
+                <p>JOB j1 - Developer no choice</p>
+            </div>
+            <div class="ui segment">
+                <p>JOB j2 - Developer no choice</p>
+            </div>
+        </div>
+        <div class="ui center aligned basic segment">
+            <button class="ui teal labeled icon button" type="submit">
+                Here we go !
+                <i class="blind icon"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+<% include footer %>

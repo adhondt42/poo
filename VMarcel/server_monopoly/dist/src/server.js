@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const gameplay_1 = require("./models/gameplay");
+const gameplay_1 = require("../models/gameplay");
 // If default export, {} not needed
 let express = require('express');
 let bodyParser = require('body-parser');
@@ -27,16 +27,16 @@ class Server {
             }
         }),
             app.get('/start', function (req, res) {
-                console.log("GET /start");
-                res.render('pages/start');
+                // console.log("GET /start")
+                // res.render('pages/start')
             }),
             app.post('/register_players', function (req, res) {
-                console.log("Post /register_players");
+                // console.log("Post /register_players")
                 // gameplay.createEnv(req.body)
-                res.redirect('/');
+                // res.redirect('/')
             });
         app.listen(this.port, function () {
-            console.log("Serveur runned on port : ", port);
+            console.log("Serveur runned on poooort: ", port);
         });
     }
 }
