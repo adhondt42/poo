@@ -1,4 +1,4 @@
-var connection = require('../config/db')
+var connection = require('../db')
 
 export class Gameplay {
     cycle: number

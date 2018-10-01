@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var connection = require('../config/db');
+var connection = require('../db');
 class Gameplay {
     constructor(current_id, current_profile) {
         this.cycle = 4;
