@@ -1,6 +1,6 @@
 import {createConnection} from 'mysql';
 
-let connection = createConnection({
+const connection = createConnection({
     host: '192.168.99.100',
     password: 'root',
     database: 'monopolesql',
@@ -9,9 +9,7 @@ let connection = createConnection({
 
 connection.connect()
 
-export {connection}
+export default connection
 
 
-
-//     VM: '192.168.99.100',
-// container : IP:172.17.0.2 || Gateway:172.17.0.1
+// CREATE TABLE players (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(45) NOT NULL, job VARCHAR(45) NOT NULL, cash INT NOT NULL, dev_unit INT NOT NULL, inv_unit INT NOT NULL, PRIMARY KEY (id));

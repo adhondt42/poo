@@ -1,38 +1,123 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var connection = require('../db');
-class Gameplay {
-    constructor(current_id, current_profile) {
-        this.cycle = 4;
+const db_1 = __importDefault(require("../db"));
+class GameEnv {
+    createEnv(n1, n2) {
+        this.RmDB(n1, n2);
     }
-    checkGameStatus() {
-        return 0;
+    getDOM(cb) {
+        var cyc;
+        var current;
+        this.getCyclepCurrent(function (cyc, current) {
+            var DOM = {
+                cycle: cyc,
+                pCurrent: current
+            };
+            cb(DOM);
+        });
     }
-    updateData(cb) {
-        cb("ouioui");
+    RmDB(p1Name, p2Name) {
+        db_1.default.query('DROP TABLE players');
+        db_1.default.query('DROP TABLE market');
+        db_1.default.query("CREATE TABLE players (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(45) NOT NULL, revenu INT NOT NULL, cash INT NOT NULL, rd INT NOT NULL, devTeam INT NOT NULL, invTeam INT NOT NULL, PRIMARY KEY (id))");
+        db_1.default.query('CREATE TABLE market (id INT NOT NULL AUTO_INCREMENT, cycle INT NOT NULL, pCurrent VARCHAR(45), PRIMARY KEY (id))');
+        db_1.default.query('INSERT INTO market SET id = 0, cycle = 0, pCurrent = ?', [p1Name]);
     }
-    restart() {
-        console.log("gameplay.restart");
-    }
-    createEnv(req) {
-        ///connection.query()
-        console.log('gameplay.createEnv');
+    getCyclepCurrent(cb) {
+        db_1.default.query('SELECT cycle, pCurrent FROM market WHERE id = 1', (err, res) => {
+            if (err) {
+                console.log(err);
+                throw (err);
+            }
+            else {
+                cb(res[0].cycle, res[0].pCurrent);
+            }
+        });
     }
 }
-exports.Gameplay = Gameplay;
-// class Employee {
-// 	fullname: string
-// 	weekData: weekType
-// 	constructor(firstname: string, lastname: string, completeWeek:Array<number>, dayoff:number) {
-// 		this.weekData = {completeWeek, dayoff}
-// 		this.fullname = this.fullName(firstname, lastname)
-// 	}
-// 	public fullName (firstname: string, lastname: string):string {
-// 		let fullname:string
-// 		fullname = this.buildFullName(firstname, lastname)
-// 		return fullname
-// 	}
-// 	private buildFullName(firstname: string, lastname: string): string {
-// 		return (firstname + ' ' + lastname)
-// 	}
+exports.GameEnv = GameEnv;
+class Player {
+    constructor(player) {
+        this.pId = player.pId;
+        this.pName = player.pName;
+        this.pCash = player.pCash;
+        this.pRevenu = player.pRevenu;
+        this.pRd = player.pRd;
+        this.pDevTeam = player.pDevTeam;
+        this.pInvTeam = player.pInvTeam;
+    }
+    applyRd(nextPlayer) {
+        this.pRd += 1;
+        this.pRevenu += 100;
+        this.pCash += (this.pRevenu - 400);
+        this.changeCurrentPlayer(nextPlayer);
+    }
+    applyHr(nextPlayer) {
+        this.pDevTeam += 1;
+        this.pRevenu += 400;
+        this.pCash += (this.pRevenu - 1200);
+        this.changeCurrentPlayer(nextPlayer);
+    }
+    applyHi(nextPlayer) {
+        this.pInvTeam += 1;
+        this.pRevenu += 3200;
+        this.pCash += (this.pRevenu - 7500);
+        this.changeCurrentPlayer(nextPlayer);
+    }
+    applyPass(nextPlayer) {
+        this.pCash += this.pRevenu;
+        this.changeCurrentPlayer(nextPlayer);
+    }
+    changeCurrentPlayer(nextPlayer) {
+        db_1.default.query('UPDATE market SET pCurrent = ? WHERE id = 1', [nextPlayer], (err, res) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+        });
+    }
+}
+exports.Player = Player;
+class Investor extends Player {
+}
+exports.Investor = Investor;
+// export class Dev extends Player {
+//     currentJob:string
+//     constructor(pId:number, pName:string, pCash:number) {
+//         super({pId: pId, pName: pName, pCash: pCash})
+//         this.currentJob = "typescript"
+//     }
+// }
+//         // public actionHR() {
+// }
+// public actionHI() { // Hire Investor 
+// }
+// public registerPlayer() {
+//     let sql = 'INSERT INTO players SET name = ?, job = ?, cash = ?, dev_unit = ?, inv_unit = ?, marketShare = ?';
+//     connection.query(sql, [this.pId, this.pName, this.pJob, this.pCash, this.dev_unit, this.inv_unit, this.marketShare], function (err, result) {
+//         if (err) {
+//             console.log(err)
+//             return 0
+//         }
+//     })
+// }
+// private executeAction(method: 'actionRD' | 'actionHR' | 'actionHI') { 
+//     this.p1cycle += 50
+// }
+// export class Market {
+//     cycle: number
+//     p1cycle : number
+//     p2cycle : number
+//     constructor () {
+//         this.cycle = 0
+//         this.p1cycle = 0
+//         this.p2cycle = 0
+//     }
+//     public getData () {
+//         console.log("Les chiffres du jour sont :", this.cycle)
+//         return this // to add other method after collecting the return
+//     }
 // }

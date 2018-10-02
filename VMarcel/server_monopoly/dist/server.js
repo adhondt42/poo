@@ -10,33 +10,68 @@ class Server {
     }
     start(port) {
         const app = express();
-        let gameplay = new gameplay_1.Gameplay(1, 2);
+        var GamEnv; // same as p1, to modify
+        var p1; // any because lot of function to right
+        var p2;
+        // middlwares 
         app.set('view engine', 'ejs');
-        app.use(express.static('public')); // dossier contient les statics
-        app.use(bodyParser.urlencoded({ extended: false })); // bodyparder pour req.xxxxx
+        app.use(express.static('public'));
+        app.use(bodyParser.urlencoded({ extended: false }));
         app.get('/', function (req, res) {
-            let status;
-            console.log("GET /");
-            status = gameplay.checkGameStatus();
-            if (status === 0)
-                res.redirect('/start');
-            else {
-                gameplay.updateData(function (domData) {
-                    res.render('pages/index', { domData }); // retourne le template
-                });
-            }
+            GamEnv.getDOM(function (DOM) {
+                res.render('pages/index', { p1, p2, DOM });
+            });
         }),
             app.get('/start', function (req, res) {
-                console.log("GET /start");
                 res.render('pages/start');
             }),
             app.post('/register_players', function (req, res) {
-                console.log("Post /register_players");
-                // gameplay.createEnv(req.body)
+                GamEnv = new gameplay_1.GameEnv();
+                p1 = new gameplay_1.Player({ pId: 1, pName: req.body.p1_name, pCash: 400, pRevenu: 0, pRd: 0, pDevTeam: 0, pInvTeam: 0 });
+                p2 = new gameplay_1.Player({ pId: 2, pName: req.body.p2_name, pCash: 400, pRevenu: 0, pRd: 0, pDevTeam: 0, pInvTeam: 0 });
+                GamEnv.createEnv(req.body.p1_name, req.body.p2_name);
                 res.redirect('/');
             });
         app.listen(this.port, function () {
-            console.log("Serveur runned on port : ", port);
+            console.log("Serveur run on port : ", port);
+        });
+        // Decouper le fichier ? 
+        // Gerer les routes avec une variable /action/%x  pour ne pas créer 3 routes.
+        app.get('/rd', function (req, res) {
+            GamEnv.getDOM(function (DOM) {
+                if (DOM.pCurrent === p1.pName)
+                    p1.applyRd(p2.pName, function () { });
+                else
+                    p2.applyRd(p1.pName, function () { });
+            });
+            res.redirect('/');
+        });
+        app.get('/hr', function (req, res) {
+            GamEnv.getDOM(function (DOM) {
+                if (DOM.pCurrent === p1.pName)
+                    p1.applyHr(p2.pName, function () { });
+                else
+                    p2.applyHr(p1.pName, function () { });
+            });
+            res.redirect('/');
+        });
+        app.get('/hi', function (req, res) {
+            GamEnv.getDOM(function (DOM) {
+                if (DOM.pCurrent === p1.pName)
+                    p1.applyHi(p2.pName, function () { });
+                else
+                    p2.applyHi(p1.pName, function () { });
+            });
+            res.redirect('/');
+        });
+        app.get('/pass', function (req, res) {
+            GamEnv.getDOM(function (DOM) {
+                if (DOM.pCurrent === p1.pName)
+                    p1.applyPass(p2.pName, function () { });
+                else
+                    p2.applyPass(p1.pName, function () { });
+            });
+            res.redirect('/');
         });
     }
 }
