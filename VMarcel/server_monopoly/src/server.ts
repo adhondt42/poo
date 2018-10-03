@@ -36,6 +36,17 @@ export default class Server {
             })
         }),
 
+        app.get('/action/:id', function (req: Request, res: Response) {
+            var i = req.params.id
+            GamEnv.getDOM(function(DOM:gameDOM) {
+                if (DOM.pCurrent === p1.pName)
+                    p1[i](p2.pName, function() {/* Keep it for future */ })
+                else 
+                    p2[i](p1.pName, function() {})
+            })
+            res.redirect('/')                
+        })
+
         app.get('/start', function (req: Request, res:Response) {
             res.render('pages/start')
         }),
@@ -51,19 +62,5 @@ export default class Server {
         app.listen(this.port, function () {
             console.log("Serveur run on port : ", port)
             })
-
-
-
-// Decouper le fichier ? 
-        app.get('/action/:id', function (req: Request, res: Response) {
-            var i = req.params.id
-            GamEnv.getDOM(function(DOM:gameDOM) {
-                if (DOM.pCurrent === p1.pName)
-                    p1[i](p2.pName, function() {/* Keep it for future */ })
-                else 
-                    p2[i](p1.pName, function() {})
-            })
-            res.redirect('/')                
-        })
     }
 }
