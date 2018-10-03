@@ -5,6 +5,20 @@ import {pType, gameDOM} from "./interface"
 
 
 export class GameEnv {
+    cycle:number
+    originalcycle: number
+    maindata: {
+        maincycle:number
+    }
+
+
+    constructor(startcycle: number) {
+        this.cycle = startcycle
+        this.originalcycle = 10
+        this.maindata = {
+            maincycle: 0
+        }
+    }
     public createEnv(n1: string, n2: string) {
         this.RmDB(n1, n2)
     }
@@ -42,8 +56,7 @@ export class GameEnv {
 
 }
 
-
-export class Player {
+export class Player extends GameEnv {
     pId: number
 	pName: string
     pCash: number
@@ -52,7 +65,8 @@ export class Player {
     pDevTeam: number
     pInvTeam: number
 
-    constructor(player: pType) {
+    constructor(player: pType, cycle: number) {
+        super(cycle)
         this.pId = player.pId
         this.pName = player.pName
         this.pCash = player.pCash
@@ -95,10 +109,40 @@ export class Player {
     }
 }
 
-export class Investor extends Player {
-
+export class Dev extends Player {
+    public MakeRD() {
+        this.cycle += 50
+    }
 }
 
+
+export class Plateau {
+    cases: number
+    joueurs: number
+    maindata: {
+        tour: number
+    }
+    constructor () {
+        this.cases = 12
+        this.joueurs = 3
+        this.maindata = {
+            tour: 4
+        }
+    }
+}
+
+
+
+
+    var Monnaie = {
+        pieces: 2,
+        origine: {
+            pays: "France",
+            continents: 2
+        }
+    }
+
+    export {Monnaie}
 // export class Dev extends Player {
 //     currentJob:string
     

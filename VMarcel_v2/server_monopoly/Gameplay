@@ -1,0 +1,32 @@
+Objectif : Racheter les autres (type: conquete du monde)
+
+Gameplay : 
+    Pour commencer il faut choisir parmis deux classes : Developpeur ou Investisseur 
+
+Ressources partagées : 
+    Taille du marché
+        ressource economique 
+        popularité
+    Temps (système de cycle, chaque action individuelle prend un certain nombre de cycle à se réaliser, ce qui permet de créer une ressrouce temps)
+
+
+Investisseurs : 
+    Ressource principale : Argent pour :
+        Investissement court terme : campagne promotionelle (coute pas cher, augmente rapidement mais legerement les part de marché) 
+        Investissement moyen terme : Recruter des dev pour developper l'appli (augmente le revenu)
+        Investissement long terme  : Faire de la R&D (coute cher mais pemet de capter recuperer enormemenent des parts de marché)
+    gameplay : inject de l'oseille 
+    ressource principale : oseille 
+
+Developpeur :
+    Ressource principale : Temps pour dev et séduire le marché ou les investisseurs 
+    Peux ouvrir un nouveau marché 
+    Investissement court terme : ouverture de nouveau marché 
+    Investissement moyen terme :
+    Investissement long terme : recherche d'investisseurs 
+    gameplay : investissement en temps 
+    ressource principale : temps 
+
+Stratégie : Argent vs Temps 
+
+

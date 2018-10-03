@@ -1,0 +1,68 @@
+## Typescript en POO ## 
+
+	################
+### INTRODUCE		###
+	################
+
+	Terminal :
+	tsc		--target es5
+			--help
+			-init					: Create tsconfig.json
+		 	-w 						: watch builind each save
+	 		--pretty demo.ts		: Pretty error messages
+
+	Install type for module : npm i --save @types/node 
+
+	################
+### POO NOTES		###
+	################
+
+		In class Object :
+			Privacy levels : Public, static, private 
+		
+		namespae :Creer des mega objet pour isoler des bout de code... ~= module (25:20) https://www.youtube.com/watch?v=n6RoVyZEsv4&t=1323s
+
+		Differents way to create an object : https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JS_orient%C3%A9-objet
+			function : Create a basic function returning object
+			class : Using contrstructor, private & public fct
+			Object.create : Create a son (??)
+				check prototype chained list
+			extends : create a son, "super" key word usage required
+			new : Create new instance of function or class (not a son) 
+				When adding method to object, add to prototype so that is accessible to all instances
+
+
+
+			a = Object.Create(b), il y a une chaine de prototype mais a ne récupérer pas les valeurs de b. Accès au parents si par des object (cf GraphikArt) 		(tester object.create sur classe)
+			a = new b({arg})	pas de chaine de prototype a priori mais il faut intégrer les valeurs en arg car fait appel au constructeur				(tester chaine de prototypage)
+			class a extends b 	Pas de chaine de prototypage. Juste copié collé des anciennes valeurs. Utilité pour copier une librairie ? 
+			
+
+			todo : .call, .apply 
+
+		Interfaces: Create ReadOnly object that rules this object data/usage (~= structure in C)
+
+		
+		Call vs Super : https://stackoverflow.com/questions/38034059/javascript-whats-the-difference-between-call-and-super
+		
+		
+		enum : Define my own types {
+			enum Color {Red, Green, Blue}
+			let c: Color = Color.Green;
+		}
+
+	TODO:
+		Faire des test d'heritage entre les differentes methodes
+
+
+	DOC BETON : 
+		https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Le_mod%C3%A8le_objet_JavaScript_en_d%C3%A9tails#La_cr%C3%A9ation_de_la_hi%C3%A9rarchie
+
+	################
+### TYPAGE			###
+	################
+	
+	...check directly on module pages...
+		
+		express:
+			Require, Resolve

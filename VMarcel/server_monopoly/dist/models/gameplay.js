@@ -5,6 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../db"));
 class GameEnv {
+    constructor(startcycle) {
+        this.cycle = startcycle;
+        this.originalcycle = 10;
+        this.maindata = {
+            maincycle: 0
+        };
+    }
     createEnv(n1, n2) {
         this.RmDB(n1, n2);
     }
@@ -39,8 +46,9 @@ class GameEnv {
     }
 }
 exports.GameEnv = GameEnv;
-class Player {
-    constructor(player) {
+class Player extends GameEnv {
+    constructor(player, cycle) {
+        super(cycle);
         this.pId = player.pId;
         this.pName = player.pName;
         this.pCash = player.pCash;
@@ -81,9 +89,30 @@ class Player {
     }
 }
 exports.Player = Player;
-class Investor extends Player {
+class Dev extends Player {
+    MakeRD() {
+        this.cycle += 50;
+    }
 }
-exports.Investor = Investor;
+exports.Dev = Dev;
+class Plateau {
+    constructor() {
+        this.cases = 12;
+        this.joueurs = 3;
+        this.maindata = {
+            tour: 4
+        };
+    }
+}
+exports.Plateau = Plateau;
+var Monnaie = {
+    pieces: 2,
+    origine: {
+        pays: "France",
+        continents: 2
+    }
+};
+exports.Monnaie = Monnaie;
 // export class Dev extends Player {
 //     currentJob:string
 //     constructor(pId:number, pName:string, pCash:number) {
