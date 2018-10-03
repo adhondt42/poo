@@ -93,17 +93,6 @@ class Server {
         app.listen(this.port, function () {
             console.log("Serveur run on port : ", port);
         });
-        // Decouper le fichier ? 
-        app.get('/action/:id', function (req, res) {
-            var i = req.params.id;
-            GamEnv.getDOM(function (DOM) {
-                if (DOM.pCurrent === p1.pName)
-                    p1[i](p2.pName, function () { });
-                else
-                    p2[i](p1.pName, function () { });
-            });
-            res.redirect('/');
-        });
     }
 }
 exports.default = Server;
