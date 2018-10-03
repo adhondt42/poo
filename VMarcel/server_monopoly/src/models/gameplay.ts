@@ -11,7 +11,7 @@ export class GameEnv {
 
     public getDOM(cb: (DOM: gameDOM) => void) {
         
-        var cyc:number
+        var cyc: number
         var current: string
         this.getCyclepCurrent(function(cyc, current) {
             var DOM = {

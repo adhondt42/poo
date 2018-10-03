@@ -36,40 +36,13 @@ class Server {
             console.log("Serveur run on port : ", port);
         });
         // Decouper le fichier ? 
-        // Gerer les routes avec une variable /action/%x  pour ne pas créer 3 routes.
-        app.get('/rd', function (req, res) {
+        app.get('/action/:id', function (req, res) {
+            var i = req.params.id;
             GamEnv.getDOM(function (DOM) {
                 if (DOM.pCurrent === p1.pName)
-                    p1.applyRd(p2.pName, function () { });
+                    p1[i](p2.pName, function () { });
                 else
-                    p2.applyRd(p1.pName, function () { });
-            });
-            res.redirect('/');
-        });
-        app.get('/hr', function (req, res) {
-            GamEnv.getDOM(function (DOM) {
-                if (DOM.pCurrent === p1.pName)
-                    p1.applyHr(p2.pName, function () { });
-                else
-                    p2.applyHr(p1.pName, function () { });
-            });
-            res.redirect('/');
-        });
-        app.get('/hi', function (req, res) {
-            GamEnv.getDOM(function (DOM) {
-                if (DOM.pCurrent === p1.pName)
-                    p1.applyHi(p2.pName, function () { });
-                else
-                    p2.applyHi(p1.pName, function () { });
-            });
-            res.redirect('/');
-        });
-        app.get('/pass', function (req, res) {
-            GamEnv.getDOM(function (DOM) {
-                if (DOM.pCurrent === p1.pName)
-                    p1.applyPass(p2.pName, function () { });
-                else
-                    p2.applyPass(p1.pName, function () { });
+                    p2[i](p1.pName, function () { });
             });
             res.redirect('/');
         });

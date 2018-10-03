@@ -12,20 +12,28 @@
                         </div>
                         <div class="ui segments">
                           <div class="ui horizontal segments">
-                            <div class = "ui compact segment"><%= p1.pName %></div> 
+                              <%if (DOM.pCurrent === p2.pName) { %>
+                                <div class = "ui compact segment"><%= p1.pName %></div> 
+                              <% } else {%>
+                                <div class = "ui compact teal inverted segment"><%= p1.pName %></div> 
+                                <% }%>
                             <div class = "ui segment">Ressources : <%= p1.pCash%></div>
-                            <div class = "ui segment">Revenu: <%= p1.pRevenu%></div>
-                            <div class = "ui segment">R&D : <%= p1.pRd%></div>
-                            <div class = "ui segment">Dev : <%= p1.pDevTeam%></div>
-                            <div class = "ui segment">inv : <%= p1.pInvTeam%></div>
+                            <div class = "ui inverted green segment">Revenu: <%= p1.pRevenu%></div>
+                            <div class = "ui inverted yellow segment">R&D : <%= p1.pRd%></div>
+                            <div class = "ui inverted orange segment">Dev : <%= p1.pDevTeam%></div>
+                            <div class = "ui inverted red segment">inv : <%= p1.pInvTeam%></div>
                           </div>
                           <div class="ui horizontal segments">
+                              <%if (DOM.pCurrent === p1.pName) { %>
                                 <div class = "ui compact segment"><%= p2.pName %></div> 
+                              <% } else {%>
+                                <div class = "ui compact teal inverted segment"><%= p2.pName %></div> 
+                                <% }%>
                                 <div class = "ui segment">Ressources: <%= p2.pCash %></div>
-                                <div class = "ui segment">Revenu: <%= p2.pRevenu%></div>
-                                <div class = "ui segment">R&D : <%= p2.pRd%></div>
-                                <div class = "ui segment">Dev : <%= p2.pDevTeam%></div>
-                                <div class = "ui segment">inv : <%= p2.pInvTeam%></div>
+                                <div class = "ui inverted green segment">Revenu: <%= p2.pRevenu%></div>
+                                <div class = "ui inverted yellow segment">R&D : <%= p2.pRd%></div>
+                                <div class = "ui inverted orange segment">Dev : <%= p2.pDevTeam%></div>
+                                <div class = "ui inverted red segment">inv : <%= p2.pInvTeam%></div>
                             </div>
                         </div>
                     
@@ -40,7 +48,7 @@
                                 <a class="ui blue ribbon label">Developer</a>
                                 <p>R&D +100/tour - 400e </p>
                                 <%if (((DOM.pCurrent === p1.pName) ? p1.pCash : p2.pCash) >= 400) { %>
-                                  <form action ="/rd">
+                                  <form action ="/action/applyRd">
                                     <button class="ui primary button right floated"> 400e </button> 
                                   </form>
                                   <% } %>
@@ -48,7 +56,7 @@
                               <div class="column orange ">
                                   <p>Recruit dev +400/tour - 1200e </p>
                                   <%if (((DOM.pCurrent === p1.pName) ? p1.pCash : p2.pCash) >= 1200) { %>
-                                  <form action ="/hr">
+                                  <form action ="/action/applyHr">
                                     <button class="ui primary button right floated"> 1200e </button> 
                                   </form>
                                   <% } %>
@@ -56,14 +64,14 @@
                               <div class="column red">
                                   <p>Recruit Investor +3200/tour - 7500e </p>
                                 <%if (((DOM.pCurrent === p1.pName) ? p1.pCash : p2.pCash) >= 7500) { %>
-                                  <form action ="/hi">
+                                  <form action ="/action/applyHi">
                                     <button class="ui primary button right floated"> 7500e </button> 
                                   </form>
                                   <% }  %>
 
                               </div>
                               
-                              <form action ="/pass">
+                              <form action ="/action/applyPass">
                                 <button class="ui primary button center floated"> Passer </button> 
                               </form>
                           </div>
