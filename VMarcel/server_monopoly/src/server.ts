@@ -39,25 +39,25 @@ export default class Server {
                 res.render('pages/index', {p1, p2, DOM})
             })
         }),
-
-<<<<<<< HEAD
-=======
         app.get('/action/:id', function (req: Request, res: Response) {
             var i = req.params.id
             GamEnv.getDOM(function(DOM:gameDOM) {
-                if (DOM.pCurrent === p1.pName)
+                if (DOM.pCurrent === p1.pName){
                     p1[i](p2.pName, function() {/* Keep it for future */ })
-                else 
+                }
+                else {
                     p2[i](p1.pName, function() {})
+                }
             })
             res.redirect('/')                
         })
+
+
 
         app.get('/start', function (req: Request, res:Response) {
             res.render('pages/start')
         }),
 
->>>>>>> 164edc185833e7e0e1a2259cfded934b1ba2771e
         app.post('/register_players', function (req: Request, res: Response) {
             GamEnv = new GameEnv(55)
             p1 = new Player({pId: 1, pName: req.body.p1_name, pCash: 400, pRevenu: 0, pRd: 0, pDevTeam: 0, pInvTeam: 0}, 55)

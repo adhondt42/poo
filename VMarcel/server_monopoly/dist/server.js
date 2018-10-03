@@ -25,6 +25,21 @@ class Server {
                 res.render('pages/index', { p1, p2, DOM });
             });
         }),
+            app.get('/action/:id', function (req, res) {
+                var i = req.params.id;
+                GamEnv.getDOM(function (DOM) {
+                    if (DOM.pCurrent === p1.pName) {
+                        p1[i](p2.pName, function () { });
+                    }
+                    else {
+                        p2[i](p1.pName, function () { });
+                    }
+                });
+                res.redirect('/');
+            });
+        app.get('/start', function (req, res) {
+            res.render('pages/start');
+        }),
             app.post('/register_players', function (req, res) {
                 GamEnv = new gameplay_1.GameEnv(55);
                 p1 = new gameplay_1.Player({ pId: 1, pName: req.body.p1_name, pCash: 400, pRevenu: 0, pRd: 0, pDevTeam: 0, pInvTeam: 0 }, 55);
