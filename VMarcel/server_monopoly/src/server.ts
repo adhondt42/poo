@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import {GameEnv, Player, Dev, Plateau, Monnaie} from "./models/gameplay"
+import {GameEnv, Player, Dev, Plateau, Monnaie, tasse, Ferme, Cochon} from "./models/gameplay"
 import {pType, gameDOM} from "./models/interface"
 // If default export, {} not needed
 
@@ -76,7 +76,7 @@ export default class Server {
             console.log(p1.pCash)
             var p3
             p3 = new Dev({pId: 2, pName: "el devo", pCash: 12400, pRevenu: 0, pRd: 0, pDevTeam: 0, pInvTeam: 0}, 12000)
-            console.log("BEFORE AFTER MAKE RD")
+            console.log("BEFORE AFTER MAKE R-D")
             console.log(p1.cycle)
             console.log(p2.cycle)
             console.log(p3.cycle)
@@ -127,8 +127,118 @@ export default class Server {
             m2.origine.pays = "Belgique" 
             console.log("m2.origine.pays = Belgique", m2.origine.pays)
             console.log("m1.origine.pays : ", m1.origine.pays)
+            console.log("CALL M1, PLAYER")
+            // m1.call(null, {pieces: 5}) FALSE, not a fun 
+            
+            console.log("After call false: ", m1)
+
+            // function getm1(this:any, pieces: number) {
+            //     var pesos:number 
+            //     console.log("ooook")
+            //     return this
+            // }
+
+            // m1 = getm1(5)
+            console.log("After function like proto: ", m1)
 
 
+
+            // var m3 = Object.create(Monnaie, (pieces))
+
+            console.log("=============== create obj with fun ==========================")
+
+            function Forme(this:any ) {
+                this.x = 0;
+                this.y = 0;
+              }
+              
+              // Méthode de la classe parente
+              Forme.prototype.déplacer = function(x:number, y:number) {
+                this.x += x;
+                this.y += y;
+                console.info('Forme déplacée.');
+              };
+              
+              // Rectangle - classe fille
+              function Rectangle(this:any) {
+                // on appelle le constructeur parent
+                Forme.call(this);
+              }
+              
+              // La classe fille surcharge la classe parente
+              Rectangle.prototype = Object.create(Forme.prototype);
+              Rectangle.prototype.constructor = Rectangle;
+
+            var top = Object.create(Rectangle)
+            
+            console.log("-------------------_____triaining______-----------")
+            
+
+            //   var a = {
+            //       b: 12,
+            //       c: 13
+            //   }
+
+            // function removeProperty(obj: any, prop: any) {
+            //     console.log("obj before : ", obj)
+            //    for (let key in obj) {
+            //     console.log("key: ", key, "prop :", prop)
+
+            //         if (key === prop){
+            //             delete obj[prop]
+            //         }
+            //    }
+            //    console.log("obj after : ", obj)
+
+            // }
+            
+            // removeProperty(a, "b")
+            
+            
+
+            // var t1 = Object.create(tasse)
+            // console.log(t1)
+            // tasse.call(t1, "Hervé", 4)
+            // console.log(t1)
+
+            // function createTasse(this:any, name:string, number:number) {
+            //     tasse.call(this, name, number)
+            //     this.style = "old"
+            // }
+            
+            // var t1 = createTasse("chou", 3)
+            // console.log(t1)
+
+
+            // function Product(this:any, name:string, price: number) {
+            //     this.name = name;
+            //     this.price = price;
+            //   }
+              
+            //   function Food(this: any, name:string , price: number) {
+            //     Product.call(this, name, price);
+            //     this.category = 'food';
+            //   }
+              
+            //   let b1 = (new Food('cheese', 5) as any)
+              
+              // function newTasse(this:any, name:string, number:number, placard:{}) {
+
+            // }
+            
+            console.log("========= Modif parent par method parent ======= ")
+            
+            var moulin = new Ferme()
+            console.log(moulin)
+
+            var pig = new Cochon("Eric", 4)
+            console.log(pig)
+            pig.addAnimal(moulin)
+            console.log("Appel fct parente")
+            console.log(moulin)
+            console.log(pig)
+
+            
             res.redirect('/')
         })
 

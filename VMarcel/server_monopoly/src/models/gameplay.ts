@@ -132,7 +132,33 @@ export class Plateau {
 }
 
 
+export class Ferme { 
+    animalscount: number
+    obj: {
+        nombre:number
+    }
+    constructor() {
+        this.animalscount = 0
+        this.obj = {
+            nombre: 0
+        }
+    }
+    addAnimal(ferme:any) {
+        ferme.animalscount += 1
+        ferme.obj.nombre += 1
+    }
+}
 
+export class Cochon extends Ferme { 
+    
+    name:string 
+    pattes:number
+    constructor (name:string, pattes:number) {
+        super()
+        this.pattes = pattes
+        this.name = name
+    }
+}
 
     var Monnaie = {
         pieces: 2,
@@ -142,7 +168,17 @@ export class Plateau {
         }
     }
 
-    export {Monnaie}
+    function tasse(this:any, name:string, nb:number, placard:{}) {
+        this.name = name
+        this.number = 3
+        // this.placard = {
+        //     verre: 3,
+        //     assietes: 5,
+        //     writable: true
+        // }
+    }
+
+    export {Monnaie, tasse}
 // export class Dev extends Player {
 //     currentJob:string
     

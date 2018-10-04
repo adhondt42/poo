@@ -105,6 +105,27 @@ class Plateau {
     }
 }
 exports.Plateau = Plateau;
+class Ferme {
+    constructor() {
+        this.animalscount = 0;
+        this.obj = {
+            nombre: 0
+        };
+    }
+    addAnimal(ferme) {
+        ferme.animalscount += 1;
+        ferme.obj.nombre += 1;
+    }
+}
+exports.Ferme = Ferme;
+class Cochon extends Ferme {
+    constructor(name, pattes) {
+        super();
+        this.pattes = pattes;
+        this.name = name;
+    }
+}
+exports.Cochon = Cochon;
 var Monnaie = {
     pieces: 2,
     origine: {
@@ -113,6 +134,16 @@ var Monnaie = {
     }
 };
 exports.Monnaie = Monnaie;
+function tasse(name, nb, placard) {
+    this.name = name;
+    this.number = 3;
+    // this.placard = {
+    //     verre: 3,
+    //     assietes: 5,
+    //     writable: true
+    // }
+}
+exports.tasse = tasse;
 // export class Dev extends Player {
 //     currentJob:string
 //     constructor(pId:number, pName:string, pCash:number) {
